@@ -2,7 +2,7 @@ package az.edu.turing.model;
 
 import java.util.Objects;
 
-public class Order extends BaseEntity{
+public class Order extends BaseEntity {
 
     private Long userId;
     private Long productId;

@@ -1,5 +1,7 @@
 package az.edu.turing.repository;
 
+import az.edu.turing.exception.OrderException;
+import az.edu.turing.exception.UserException;
 import az.edu.turing.model.User;
 
 import java.util.ArrayList;
@@ -11,12 +13,18 @@ public class UserRepository implements GenericRepository<User> {
 
     @Override
     public Optional<User> findById(Long id) {
-        for (User user: users){
-            if (user.getId().equals(id)){
-                return Optional.of(user);
+        try {
+            for (User user : users) {
+                if (user.getId().equals(id)) {
+                    return Optional.of(user);
+                }
             }
+            throw new UserException("User with id-" + id + " not found.");
+        } catch (UserException e) {
+            System.out.println(e.getMessage());
+            return null;
         }
-        return null;
+
     }
 
     @Override
@@ -31,14 +39,18 @@ public class UserRepository implements GenericRepository<User> {
 
     @Override
     public void update(Long id, User user) {
-        delete(id);
-        save(user);
+        try {
+            delete(id);
+            save(user);
+        } catch (OrderException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
     public void delete(Long id) {
-        for (int i =0; i<users.size();i++){
-            if (users.get(i).getId().equals(id)){
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getId().equals(id)) {
                 users.remove(i);
                 break;
             }

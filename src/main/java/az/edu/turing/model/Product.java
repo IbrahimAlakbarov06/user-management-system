@@ -2,7 +2,7 @@ package az.edu.turing.model;
 
 import java.util.Objects;
 
-public class Product extends BaseEntity{
+public class Product extends BaseEntity {
 
     private String name;
     private double price;
