@@ -1,6 +1,7 @@
 package az.edu.turing.repository;
 
 import az.edu.turing.model.Order;
+import az.edu.turing.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,12 +13,16 @@ public class OrderRepository implements GenericRepository<Order> {
 
     @Override
     public Optional<Order> findById(Long id) {
-        return Optional.empty();
-    }
+        for (Order order: orders){
+            if (order.getId().equals(id)){
+                return Optional.of(order);
+            }
+        }
+        return null;    }
 
     @Override
     public List<Order> findAll() {
-        return List.of();
+        return orders;
     }
 
     @Override
@@ -27,11 +32,17 @@ public class OrderRepository implements GenericRepository<Order> {
 
     @Override
     public void update(Long id, Order order) {
-
+        delete(id);
+        save(order);
     }
 
     @Override
     public void delete(Long id) {
-
+        for (int i =0; i<orders.size();i++){
+            if (orders.get(i).getId().equals(id)){
+                orders.remove(i);
+                break;
+            }
+        }
     }
 }

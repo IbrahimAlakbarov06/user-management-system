@@ -11,12 +11,17 @@ public class UserRepository implements GenericRepository<User> {
 
     @Override
     public Optional<User> findById(Long id) {
-        return Optional.empty();
+        for (User user: users){
+            if (user.getId().equals(id)){
+                return Optional.of(user);
+            }
+        }
+        return null;
     }
 
     @Override
     public List<User> findAll() {
-        return List.of();
+        return users;
     }
 
     @Override
@@ -26,11 +31,18 @@ public class UserRepository implements GenericRepository<User> {
 
     @Override
     public void update(Long id, User user) {
-
+        delete(id);
+        save(user);
     }
 
     @Override
     public void delete(Long id) {
+        for (int i =0; i<users.size();i++){
+            if (users.get(i).getId().equals(id)){
+                users.remove(i);
+                break;
+            }
+        }
 
     }
 }
