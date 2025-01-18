@@ -3,15 +3,14 @@ package az.edu.turing;
 import java.util.List;
 import java.util.Optional;
 
-public class ProductRepository implements GenericRepository<Product>
-{
+public class OrderRepository implements GenericRepository<Order>{
     @Override
-    public Optional<Product> findById(long id) {
+    public Optional<Order> findById(long id) {
         return Optional.empty();
     }
 
     @Override
-    public List<Product> findAll() {
+    public List<Order> findAll() {
         return List.of();
     }
 
